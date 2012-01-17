@@ -1,0 +1,22 @@
+{
+  "name": "react-deferred",
+  "version": "0.0.1",
+  "description": "react-deferred is a plugin for react, the flow control rules engine, which adds integration with jQuery-style Deferred promises",
+  "main": "lib/react-deferred",
+  "author": "Jeff Barczewski <jeff.barczewski@gmail.com>",
+  "repository": { "type": "git", "url": "http://github.com/jeffbski/react-deferred.git" },
+  "bugs" : { "url": "http://github.com/jeffbski/react-deferred/issues" },
+  "licenses": [{ "type": "MIT", "url" : "http://github.com/jeffbski/react-deferred/raw/master/LICENSE" }],
+  "engines": { "node": "*" },
+  "dependencies": {
+    "react": "~0.3.4",
+    "Deferred": "~0.1.1"
+  },
+  "devDependencies": {
+    "tap" : "~0.1.0",
+    "tapr" : "~0.1.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/tapr test"
+  }
+}
