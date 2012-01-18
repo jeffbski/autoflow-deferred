@@ -4,12 +4,8 @@
    calling react fn without cb, switches to promise style
 */
 
-var react = require('react');
-require('../'); // require('react-deferred'); // enable deferred promise integration
-// require('react/lib/log-events').logEvents(react); // to enable stderr logging of events
-
-// OR alternatively just
-// var react = require('react-deferred');  // it passes through the react main fn
+var react = require('../');  // require('react-deferred'); // enable deferred promise integration
+// react.logEvents(); // to enable logging to stderr of flow and task events
 
 function loadData(x, y, cb) {
   setTimeout(function () {

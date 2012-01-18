@@ -4,7 +4,7 @@ var test = require('tap').test;
 
 var react = require('react');
 require('../'); // require('react-deferred');
-var EventCollector = require('react/lib/track-tasks').EventCollector;
+var EventCollector = require('react/lib/event-collector');
 
 function multiply(x, y, cb) { cb(null, x * y); }
 function add(x, y, cb) { cb(null, x + y); }
