@@ -1,5 +1,7 @@
 # react-deferred
 
+[![Build Status](https://secure.travis-ci.org/jeffbski/react-deferred.png?branch=master)](http://travis-ci.org/jeffbski/react-deferred)
+
 react-deferred is a plugin for react, the flow control rules engine, which adds integration with jQuery-style Deferred promises
 
 For more information on `react` the lightweight flow control rules engine:  http://github.com/jeffbski/react
