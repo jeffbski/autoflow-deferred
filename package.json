@@ -17,6 +17,6 @@
     "tapr" : "~0.1.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/tapr test"
+    "test": "./node_modules/tapr/bin/tapr.js ./test"
   }
 }
