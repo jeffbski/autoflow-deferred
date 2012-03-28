@@ -9,10 +9,6 @@ if (typeof(react) === 'undefined') {
   var react = require('../'); //require('react-deferred');
 }
 
-if (typeof(EventCollector) === 'undefined') {
-  var EventCollector = require('react/lib/event-collector');
-}
-
 (function () {
 
   var t = chai.assert;
@@ -60,7 +56,7 @@ if (typeof(EventCollector) === 'undefined') {
     });
     t.deepEqual(errors, [], 'no validation errors');
 
-    var collector = new EventCollector();
+    var collector = react.createEventCollector();
     collector.capture(fn, 'task.complete');
 
     fn(2, 3, function (err, c, d) {
