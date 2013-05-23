@@ -26,7 +26,7 @@ if (typeof(react) === 'undefined') {
     var fn = react();
     var errors = fn.setAndValidateAST({
       inParams: ['a', 'b'],
-      tasks: [    
+      tasks: [
         { f: multiply, a: ['a', 'b'], out: ['c'] }
       ],
       outTask: { a: ['c'] }
@@ -38,16 +38,16 @@ if (typeof(react) === 'undefined') {
       t.equal(c, 6);
       done();
     });
-  });  
+  });
 
   test('selectFirst, switch to promise style', function (done) {
     function noSuccess(a, b, cb) { cb(null); } // returns undefined result
     function noSuccessNull(a, b, cb) { cb(null, null); } // returns null result
-    
+
     var fn = react();
     var errors = fn.setAndValidateAST({
       inParams: ['a', 'b'],
-      tasks: [    
+      tasks: [
         { f: noSuccess, a: ['a', 'b'], out: ['c'] },
         { f: noSuccessNull, a: ['a', 'b'], out: ['c'], after: ['noSuccess'] },
         { f: add, a: ['a', 'b'], out: ['c'], after: ['noSuccessNull'] }
@@ -59,8 +59,8 @@ if (typeof(react) === 'undefined') {
     var collector = react.createEventCollector();
     collector.capture(fn, 'task.complete');
 
-    fn(2, 3, function (err, c, d) {
-      t.equal(err, null);
+    var promise = fn(2, 3);
+    promise.then(function (c) {
       t.equal(c, 5);
       var events = collector.list();
       t.equal(events.length, 3, 'should have seen three task compl events');
@@ -68,7 +68,7 @@ if (typeof(react) === 'undefined') {
       t.deepEqual(events[2].task.results, [5], 'results match');
       done();
     });
-  });  
+  });
 
 
   // Additional tests to convert
@@ -76,11 +76,11 @@ if (typeof(react) === 'undefined') {
   /* using promises instead of callbacks */
 
   // test('multi-step promise single ret value', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -93,14 +93,14 @@ if (typeof(react) === 'undefined') {
   //     t.equal(d, 9);
   //     done();
   //   });
-  // });  
+  // });
 
   // test('multi-step promise w promise args single ret value', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -122,15 +122,15 @@ if (typeof(react) === 'undefined') {
   //     t.equal(d, 9);
   //     done();
   //   });
-  // });  
+  // });
 
 
   // test('multi-step promise w promise args, first errors', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -160,14 +160,14 @@ if (typeof(react) === 'undefined') {
   //     t.equal(err.message, 'my-error', 'error should be passed');
   //     done();
   //   });
-  // });  
+  // });
 
   // test('multi-step promise two ret value', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -181,14 +181,14 @@ if (typeof(react) === 'undefined') {
   //     t.equal(results.d, 9);
   //     done();
   //   });
-  // });  
+  // });
 
   // test('multi-step promise with error', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: badF2, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -203,14 +203,14 @@ if (typeof(react) === 'undefined') {
   //     t.equal(err.message, 'my-error');
   //     done();
   //   });
-  // });  
+  // });
 
   // test('selectFirst promise', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['a', 'b'], cb: ['c'], after: ['multiply'] }
   //     ],
@@ -232,14 +232,14 @@ if (typeof(react) === 'undefined') {
   //     t.deepEqual(events[0].results, [6], 'results match');
   //     done();
   //   });
-  // });  
+  // });
 
   // test('selectFirst promise errors', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: badF2, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['a', 'b'], cb: ['c'], after: ['badF2'] }
   //     ],
@@ -261,18 +261,18 @@ if (typeof(react) === 'undefined') {
   //     t.equal(events.length, 0, 'should have seen one task compl events');
   //     done();
   //   });
-  // });  
+  // });
 
 
 
 
 
   // test('multi-step Qpromise single ret value', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -285,14 +285,14 @@ if (typeof(react) === 'undefined') {
   //     t.equal(d, 9);
   //     done();
   //   });
-  // });  
+  // });
 
   // test('multi-step Qpromise two ret value', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: add, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -306,14 +306,14 @@ if (typeof(react) === 'undefined') {
   //     t.equal(results.d, 9);
   //     done();
   //   });
-  // });  
+  // });
 
   // test('multi-step Qpromise with error', function (done) {
-  //   
+  //
   //   var fn = react();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
-  //     tasks: [    
+  //     tasks: [
   //       { f: multiply, a: ['a', 'b'], cb: ['c'] },
   //       { f: badF2, a: ['c', 'b'], cb: ['d'] }
   //     ],
@@ -328,6 +328,6 @@ if (typeof(react) === 'undefined') {
   //     t.equal(err.message, 'my-error');
   //     done();
   //   });
-  // });  
+  // });
 
-}());  
+}());
