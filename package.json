@@ -16,6 +16,16 @@
     "mocha": "~1.10.0",
     "chai": "~1.6.0"
   },
+  "keywords": [
+    "deferred",
+    "promise",
+    "flow",
+    "flow control",
+    "control flow",
+    "dataflow",
+    "reactive",
+    "async"
+  ],
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./test/*.mocha.js"
   }
