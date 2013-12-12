@@ -1,12 +1,12 @@
 'use strict';
-/*global react:true EventCollector:true */
+/*global autoflow:true EventCollector:true */
 
 if (typeof(chai) === 'undefined') {
   var chai = require('chai');
 }
 
-if (typeof(react) === 'undefined') {
-  var react = require('../'); //require('react-deferred');
+if (typeof(autoflow) === 'undefined') {
+  var autoflow = require('../'); //require('autoflow-deferred');
 }
 
 (function () {
@@ -14,16 +14,16 @@ if (typeof(react) === 'undefined') {
   var t = chai.assert;
 
   /**
-     Testing react-deferred
+     Testing autoflow-deferred
   */
 
-  suite('react-deferred');
+  suite('autoflow-deferred');
 
   function multiply(x, y, cb) { cb(null, x * y); }
   function add(x, y, cb) { cb(null, x + y); }
 
   test('calling without cb, switches to promise style', function (done) {
-    var fn = react();
+    var fn = autoflow();
     var errors = fn.setAndValidateAST({
       inParams: ['a', 'b'],
       tasks: [
@@ -44,7 +44,7 @@ if (typeof(react) === 'undefined') {
     function noSuccess(a, b, cb) { cb(null); } // returns undefined result
     function noSuccessNull(a, b, cb) { cb(null, null); } // returns null result
 
-    var fn = react();
+    var fn = autoflow();
     var errors = fn.setAndValidateAST({
       inParams: ['a', 'b'],
       tasks: [
@@ -56,7 +56,7 @@ if (typeof(react) === 'undefined') {
     });
     t.deepEqual(errors, [], 'no validation errors');
 
-    var collector = react.createEventCollector();
+    var collector = autoflow.createEventCollector();
     collector.capture(fn, 'task.complete');
 
     var promise = fn(2, 3);
@@ -77,7 +77,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step promise single ret value', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -97,7 +97,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step promise w promise args single ret value', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -109,7 +109,7 @@ if (typeof(react) === 'undefined') {
   //   t.deepEqual(errors, [], 'no validation errors');
 
   //   function promised(x) {
-  //     var deferred = react.options.promiseModule.defer();
+  //     var deferred = autoflow.options.promiseModule.defer();
   //     setTimeout(function () { deferred.resolve(x); }, 100);
   //     return deferred.promise;
   //   }
@@ -117,7 +117,7 @@ if (typeof(react) === 'undefined') {
   //   var p2 = promised(2);
   //   var p3 = promised(3);
 
-  //   var promise = fn(p2, p3, react.options.promiseModule);
+  //   var promise = fn(p2, p3, autoflow.options.promiseModule);
   //   promise.then(function (d) {
   //     t.equal(d, 9);
   //     done();
@@ -127,7 +127,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step promise w promise args, first errors', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -139,13 +139,13 @@ if (typeof(react) === 'undefined') {
   //   t.deepEqual(errors, [], 'no validation errors');
 
   //   function promised(x) {
-  //     var deferred = react.options.promiseModule.defer();
+  //     var deferred = autoflow.options.promiseModule.defer();
   //     setTimeout(function () { deferred.resolve(x); }, 100);
   //     return deferred.promise;
   //   }
 
   //   function promisedFails(x) {
-  //     var deferred = react.options.promiseModule.defer();
+  //     var deferred = autoflow.options.promiseModule.defer();
   //     setTimeout(function () { deferred.reject(new Error('my-error')); }, 100);
   //     return deferred.promise;
   //   }
@@ -153,7 +153,7 @@ if (typeof(react) === 'undefined') {
   //   var p2 = promisedFails(2);
   //   var p3 = promised(3);
 
-  //   var promise = fn(p2, p3, react.options.promiseModule);
+  //   var promise = fn(p2, p3, autoflow.options.promiseModule);
   //   promise.then(function (d) {
   //     t.fail('should not go here, errored');
   //   }, function (err) {
@@ -164,7 +164,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step promise two ret value', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -185,7 +185,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step promise with error', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -207,7 +207,7 @@ if (typeof(react) === 'undefined') {
 
   // test('selectFirst promise', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -236,7 +236,7 @@ if (typeof(react) === 'undefined') {
 
   // test('selectFirst promise errors', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -269,7 +269,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step Qpromise single ret value', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -289,7 +289,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step Qpromise two ret value', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [
@@ -310,7 +310,7 @@ if (typeof(react) === 'undefined') {
 
   // test('multi-step Qpromise with error', function (done) {
   //
-  //   var fn = react();
+  //   var fn = autoflow();
   //   var errors = fn.setAndValidateAST({
   //     inParams: ['a', 'b'],
   //     tasks: [

@@ -1,11 +1,11 @@
 'use strict';
 
 /**
-   calling react fn without cb, switches to promise style
+   calling autoflow fn without cb, switches to promise style
 */
 
-var react = require('../');  // require('react-deferred'); // enable deferred promise integration
-// react.logEvents(); // to enable logging to stderr of flow and task events
+var autoflow = require('../');  // require('autoflow-deferred'); // enable deferred promise integration
+// autoflow.logEvents(); // to enable logging to stderr of flow and task events
 
 function loadData(x, y, cb) {
   setTimeout(function () {
@@ -23,7 +23,7 @@ function render(user, data) {
   return user + data;
 }
 
-var fn = react('myflow', 'a, b, uid, cb -> err, renderedOut',
+var fn = autoflow('myflow', 'a, b, uid, cb -> err, renderedOut',
   loadData, 'a, b, cb -> err, c',
   loadUser, 'uid, cb -> err, user',
   render, 'user, c -> renderedOut'

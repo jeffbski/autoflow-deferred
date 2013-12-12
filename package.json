@@ -1,15 +1,15 @@
 {
-  "name": "react-deferred",
+  "name": "autoflow-deferred",
   "version": "0.7.0",
-  "description": "react-deferred is a plugin for react, the flow control rules engine, which adds integration with jQuery-style Deferred promises",
-  "main": "lib/react-deferred",
+  "description": "autoflow-deferred is a plugin for autoflow, the flow control rules engine, which adds integration with jQuery-style Deferred promises",
+  "main": "lib/autoflow-deferred",
   "author": "Jeff Barczewski <jeff.barczewski@gmail.com>",
-  "repository": { "type": "git", "url": "http://github.com/jeffbski/react-deferred.git" },
-  "bugs" : { "url": "http://github.com/jeffbski/react-deferred/issues" },
-  "licenses": [{ "type": "MIT", "url" : "http://github.com/jeffbski/react-deferred/raw/master/LICENSE" }],
+  "repository": { "type": "git", "url": "http://github.com/jeffbski/autoflow-deferred.git" },
+  "bugs" : { "url": "http://github.com/jeffbski/autoflow-deferred/issues" },
+  "licenses": [{ "type": "MIT", "url" : "http://github.com/jeffbski/autoflow-deferred/raw/master/LICENSE" }],
   "engines": { "node": ">=0.6" },
   "dependencies": {
-    "react": "~0.7.0",
+    "autoflow": "~0.7.0",
     "Deferred": "~0.1.1"
   },
   "devDependencies": {
@@ -23,7 +23,7 @@
     "flow control",
     "control flow",
     "dataflow",
-    "reactive",
+    "autoflowive",
     "async"
   ],
   "scripts": {
